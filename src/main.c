@@ -4,16 +4,22 @@
 
 int main(){
 	
-	String myString = newString("Hello, World!");
-	myString.length = stringlength;
-	myString.
+	String mystr = newString("Hello");
 
+	mystr.length = stringlength;
+	mystr.append = stringappend;
+	mystr.substring = stringsubstring;
+	mystr.replace = stringreplace;
+
+	printf("%s\n",mystr.head);
+	// printf("%p\n",mystr.this);
+	mystr.append(mystr.this, ", World!");
+	printf("%s\n",mystr.head);
+	mystr.substring(mystr.this, 0, 4);
+	printf("%s\n",mystr.head);
+	printf("%d\n",mystr.size);
 	
-	printf("%c\n",myString.head);
-	printf("%s\n",myString.head);
-	printf("%s\n",myString.head);
-	printf("%d\n",myString.size);
 	return 0;
 
-	free(myString.head);
+	free(mystr.head);
 }

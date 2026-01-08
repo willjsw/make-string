@@ -4,12 +4,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef char *(*Append)(char*);
-typedef char *(*Substring)(char*);
-typedef char *(*Replace)(char*);
+typedef void (*Append)(void *, char *);
+typedef void (*Substring)(void *, int, int);
+typedef void (*Replace)(void *, char *target, char *newstr);
 typedef int (*Length)(char *);
-
-
 
 typedef struct _String{
     char *head;
@@ -31,7 +29,7 @@ int stringlength(char *str){
 		nowchar++;
 		len++;
 	}
-	return len+1;
+	return len;
 }
 
 void memorycopy(char *dest, char *start, size_t size){
@@ -40,9 +38,37 @@ void memorycopy(char *dest, char *start, size_t size){
 	}
 }
 
-String newString(char* str){
+void stringappend(void *str, char *addstr){
+	String *s = (String *)str;
+	char *originalstr = s->head;
+	int originallen = stringlength(originalstr);
+	int addstrlen = stringlength(addstr);
+	char *newhead = (char *)malloc(originallen+addstrlen+1);
+	memorycopy(newhead, originalstr, originallen);
+	memorycopy(newhead+originallen, addstr, originallen+addstrlen);
+	s->head = newhead;
+	free(originalstr);
+}
+
+void stringsubstring(void *str, int start, int end){// 부분 문자열 시작 인덱스, 마지막 인덱스
+	String *s = (String *)str;
+	char *originalstr = s->head;
+	int originallen = stringlength(originalstr);
+	int substrlen = end-start;
+	char *newhead = (char *)malloc(substrlen+1);
+	memorycopy(newhead, originalstr+start, substrlen);
+	s->head = newhead;
+	free(originalstr);
+}
+
+void stringreplace(void *str, char *target, char *newstr){ //target을 찾아서 모두 newstr로 바꾸기
+
+}
+
+
+String newString(char *str){
 	String s;
-	int size = stringlength(str); //strlen 직접 구현
+	int size = stringlength(str)+1; //strlen 직접 구현해보기
 	s.size = size;
 	s.head = (char *)malloc(size);
 	// memcpy(&s.head, &str,size);
