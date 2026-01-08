@@ -1,10 +1,19 @@
 #include <stdio.h>
 #include "String.h"
 
+
 int main(){
-    String s;
-	s.new = StringNew;
-	String* myString = s.new("Hello, World!");
-	printf("String: %s, Size: %d\n", myString->head, myString->size);
+	
+	String myString = newString("Hello, World!");
+	myString.length = stringlength;
+	myString.
+
+	
+	printf("%c\n",myString.head);
+	printf("%s\n",myString.head);
+	printf("%s\n",myString.head);
+	printf("%d\n",myString.size);
 	return 0;
+
+	free(myString.head);
 }

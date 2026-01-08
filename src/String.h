@@ -2,35 +2,56 @@
 #define STRING_H
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-void setup();
-typedef void (*IndexOf)(int);
-typedef char* (*ToLowerCase)(char*);
-typedef char* (*ToUpperCase)(char*);
-typedef String* (*New)(char*);
+typedef char *(*Append)(char*);
+typedef char *(*Substring)(char*);
+typedef char *(*Replace)(char*);
+typedef int (*Length)(char *);
+
+
 
 typedef struct _String{
     char *head;
 	int size;
 	struct _String *this;
-	New new;
+	Substring substring;
+	Append append;
+	Replace replace;
+	Length length;
+}String;
 
-} String;
+int stringlength(char *str){
+	int len = 0;
+	char* nowchar = str;
+	while(true){
+		if(*nowchar=='\0'){
+			break;
+		}
+		nowchar++;
+		len++;
+	}
+	return len+1;
+}
 
+void memorycopy(char *dest, char *start, size_t size){
+	for(int i=0; i<size+1; i++){
+			dest[i] = start[i];
+	}
+}
 
-String* StringNew(char* str){
+String newString(char* str){
 	String s;
-	s.head = str;
-	s.size = strlen(str);
+	int size = stringlength(str); //strlen 직접 구현
+	s.size = size;
+	s.head = (char *)malloc(size);
+	// memcpy(&s.head, &str,size);
+	memorycopy(s.head, str, size);
 	s.this = &s;
-	return &s;
+	return s;
 };
-   	/*
-	- 고정 배열 + 1(마지막 NULL)
-	- string->char[] 배열 시작 메모리 주소 받기
-	- 시작 포인터 / 배열
-	- String 이라는 구조체를 쓰기 위해서는? 해당 멤버들의 함수 포인터들을 초기화 해야함
-	*/
-
 
 #endif
+
+//Class class = new Class();
+//class 메모리 확보 후 포인터 넘겨주는 것
