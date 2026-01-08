@@ -68,11 +68,11 @@ void stringreplace(void *str, char *target, char *newstr){ //target을 찾아서
 
 String newString(char *str){
 	String s;
-	int size = stringlength(str)+1; //strlen 직접 구현해보기
+	int size = stringlength(str); //strlen 직접 구현해보기
 	s.size = size;
 	s.head = (char *)malloc(size);
 	// memcpy(&s.head, &str,size);
-	memorycopy(s.head, str, size);
+	memorycopy(s.head, str, size+1);
 	s.this = &s;
 	return s;
 };
