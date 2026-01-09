@@ -1,5 +1,6 @@
 #ifndef STRING_H
 #define STRING_H
+// #include <string.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -19,7 +20,7 @@ typedef struct _String{
 	Length length;
 }String;
 
-int stringlength(char *str){
+int length(char *str){
 	int len = 0;
 	char* nowchar = str;
 	while(true){
@@ -38,11 +39,11 @@ void memorycopy(char *dest, char *start, size_t size){
 	}
 }
 
-void stringappend(void *str, char *addstr){
+void append(void *str, char *addstr){
 	String *s = (String *)str;
 	char *originalstr = s->head;
-	int originallen = stringlength(originalstr);
-	int addstrlen = stringlength(addstr);
+	int originallen = length(originalstr);
+	int addstrlen = length(addstr);
 	char *newhead = (char *)malloc(originallen+addstrlen+1);
 	memorycopy(newhead, originalstr, originallen);
 	memorycopy(newhead+originallen, addstr, originallen+addstrlen);
@@ -50,10 +51,10 @@ void stringappend(void *str, char *addstr){
 	free(originalstr);
 }
 
-void stringsubstring(void *str, int start, int end){// 부분 문자열 시작 인덱스, 마지막 인덱스
+void substring(void *str, int start, int end){// 부분 문자열 시작 인덱스, 마지막 인덱스
 	String *s = (String *)str;
 	char *originalstr = s->head;
-	int originallen = stringlength(originalstr);
+	int originallen = length(originalstr);
 	int substrlen = end-start;
 	char *newhead = (char *)malloc(substrlen+1);
 	memorycopy(newhead, originalstr+start, substrlen);
@@ -61,23 +62,26 @@ void stringsubstring(void *str, int start, int end){// 부분 문자열 시작 �
 	free(originalstr);
 }
 
-void stringreplace(void *str, char *target, char *newstr){ //target을 찾아서 모두 newstr로 바꾸기
+void replace(void *str, char *target, char *newstr){ //target을 찾아서 모두 newstr로 바꾸기
 
 }
 
 
 String newString(char *str){
 	String s;
-	int size = stringlength(str); //strlen 직접 구현해보기
+	int size = length(str); //strlen 직접 구현해보기
 	s.size = size;
 	s.head = (char *)malloc(size);
-	// memcpy(&s.head, &str,size);
+	// memcpy(s.head, str,size+1);
 	memorycopy(s.head, str, size+1);
 	s.this = &s;
+	s.length = length;
+	s.append = append;
+	s.substring = substring;
+	s.replace = replace;
 	return s;
 };
 
 #endif
 
 //Class class = new Class();
-//class 메모리 확보 후 포인터 넘겨주는 것
