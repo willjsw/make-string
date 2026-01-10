@@ -1,11 +1,10 @@
 # make-string
 ## String 클래스를 Clang으로 구성해보는 연습 프로젝트
 
-## 0. 프로젝트 개요
+## 프로젝트 개요
 - C 포인터/구조체를 활용한 String 클래스 구현
-- AI를 사용하지 않을 것
 - String 메소드를 구현할 것(length, substring, append)
-
+- AI를 사용하지 않을 것
 
 ## How to
 **Linux & Mac**
