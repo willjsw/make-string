@@ -108,7 +108,7 @@ gcc ./src/main.c -o ./build/main.exe
         void (*Substring)(void *, int, int);
         void (*Replace)(void *, char *target, char *newstr);
         //내부에 선언된 함수 포인터의 경우도, 무조건 추가하는 것보다는 필요한 경우에만 넣는 것이 좋음
-        //ex) 동일한 이름을 + 다른 동작을 하는 메서드를 "두개의 서로 다른 구조체 각각에 선언"하려고 하는 경우
+        //ex) 동일한 이름을 + 다른 동작을 하는 메서드를 "두개의 서로 다른 구조체 각각에 선언"하려고 하는 경우(상속 구현)
     } String;
     ```
 

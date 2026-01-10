@@ -4,16 +4,15 @@
 
 int main(){
 	
-	String mystr = newString("Hello"); //construct
+	String *mystr = newString("Hello"); 
 
-	printf("%s\n",mystr.head); //init string
-	mystr.append(mystr.this, ", World!"); //append
-	printf("%s\n",mystr.head);
-	mystr.substring(mystr.this, 0, 7); //substring
-	printf("%s\n",mystr.head);
-	printf("%d\n",mystr.length(mystr.this)); //length
+	printf("%s\n",mystr->head); //init string
+	mystr->append(mystr, ", World!"); //append
+	printf("%s\n",mystr->head);
+	mystr->substring(mystr, 0, 7); //substring
+	printf("%s\n",mystr->head);
 	
-	return 0;
+	delete_string(mystr);
 
-	free(mystr.head);
+	return 0;
 }
