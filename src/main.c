@@ -4,7 +4,7 @@
 
 int main(){
 	
-	String *mystr = newString("Hello"); 
+	String* mystr = new_string("Hello");  
 
 	printf("%s\n",mystr->head); //init string
 	mystr->append(mystr, ", World!"); //append
